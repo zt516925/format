@@ -1,0 +1,114 @@
+ System.out.println("Create Training Pipeline Response");
+      System.out.format("Name: %s\n", trainingPipelineResponse.getName());
+      System.out.format("Display Name: %s\n", trainingPipelineResponse.getDisplayName());
+
+      System.out.format(
+          "Training Task Definition %s\n", trainingPipelineResponse.getTrainingTaskDefinition());
+      System.out.format(
+          "Training Task Inputs: %s\n", trainingPipelineResponse.getTrainingTaskInputs());
+      System.out.format(
+          "Training Task Metadata: %s\n", trainingPipelineResponse.getTrainingTaskMetadata());
+      System.out.format("State: %s\n", trainingPipelineResponse.getState());
+
+      System.out.format("Create Time: %s\n", trainingPipelineResponse.getCreateTime());
+      System.out.format("StartTime %s\n", trainingPipelineResponse.getStartTime());
+      System.out.format("End Time: %s\n", trainingPipelineResponse.getEndTime());
+      System.out.format("Update Time: %s\n", trainingPipelineResponse.getUpdateTime());
+      System.out.format("Labels: %s\n", trainingPipelineResponse.getLabelsMap());
+
+      InputDataConfig inputDataConfig = trainingPipelineResponse.getInputDataConfig();
+      System.out.println("Input Data Config");
+      System.out.format("Dataset Id: %s", inputDataConfig.getDatasetId());
+      System.out.format("Annotations Filter: %s\n", inputDataConfig.getAnnotationsFilter());
+
+      FractionSplit fractionSplit = inputDataConfig.getFractionSplit();
+      System.out.println("Fraction Split");
+      System.out.format("Training Fraction: %s\n", fractionSplit.getTrainingFraction());
+      System.out.format("Validation Fraction: %s\n", fractionSplit.getValidationFraction());
+      System.out.format("Test Fraction: %s\n", fractionSplit.getTestFraction());
+
+      FilterSplit filterSplit = inputDataConfig.getFilterSplit();
+      System.out.println("Filter Split");
+      System.out.format("Training Filter: %s\n", filterSplit.getTrainingFilter());
+      System.out.format("Validation Filter: %s\n", filterSplit.getValidationFilter());
+      System.out.format("Test Filter: %s\n", filterSplit.getTestFilter());
+
+      PredefinedSplit predefinedSplit = inputDataConfig.getPredefinedSplit();
+      System.out.println("Predefined Split");
+      System.out.format("Key: %s\n", predefinedSplit.getKey());
+
+      TimestampSplit timestampSplit = inputDataConfig.getTimestampSplit();
+      System.out.println("Timestamp Split");
+      System.out.format("Training Fraction: %s\n", timestampSplit.getTrainingFraction());
+      System.out.format("Validation Fraction: %s\n", timestampSplit.getValidationFraction());
+      System.out.format("Test Fraction: %s\n", timestampSplit.getTestFraction());
+      System.out.format("Key: %s\n", timestampSplit.getKey());
+
+      Model modelResponse = trainingPipelineResponse.getModelToUpload();
+      System.out.println("Model To Upload");
+      System.out.format("Name: %s\n", modelResponse.getName());
+      System.out.format("Display Name: %s\n", modelResponse.getDisplayName());
+      System.out.format("Description: %s\n", modelResponse.getDescription());
+
+      System.out.format("Metadata Schema Uri: %s\n", modelResponse.getMetadataSchemaUri());
+      System.out.format("Metadata: %s\n", modelResponse.getMetadata());
+      System.out.format("Training Pipeline: %s\n", modelResponse.getTrainingPipeline());
+      System.out.format("Artifact Uri: %s\n", modelResponse.getArtifactUri());
+
+      System.out.format(
+          "Supported Deployment Resources Types: %s\n",
+          modelResponse.getSupportedDeploymentResourcesTypesList());
+      System.out.format(
+          "Supported Input Storage Formats: %s\n",
+          modelResponse.getSupportedInputStorageFormatsList());
+      System.out.format(
+          "Supported Output Storage Formats: %s\n",
+          modelResponse.getSupportedOutputStorageFormatsList());
+
+      System.out.format("Create Time: %s\n", modelResponse.getCreateTime());
+      System.out.format("Update Time: %s\n", modelResponse.getUpdateTime());
+      System.out.format("Labels: %sn\n", modelResponse.getLabelsMap());
+
+      PredictSchemata predictSchemata = modelResponse.getPredictSchemata();
+      System.out.println("Predict Schemata");
+      System.out.format("Instance Schema Uri: %s\n", predictSchemata.getInstanceSchemaUri());
+      System.out.format("Parameters Schema Uri: %s\n", predictSchemata.getParametersSchemaUri());
+      System.out.format("Prediction Schema Uri: %s\n", predictSchemata.getPredictionSchemaUri());
+
+      for (ExportFormat exportFormat : modelResponse.getSupportedExportFormatsList()) {
+        System.out.println("Supported Export Format");
+        System.out.format("Id: %s\n", exportFormat.getId());
+      }
+
+      ModelContainerSpec modelContainerSpec = modelResponse.getContainerSpec();
+      System.out.println("Container Spec");
+      System.out.format("Image Uri: %s\n", modelContainerSpec.getImageUri());
+      System.out.format("Command: %s\n", modelContainerSpec.getCommandList());
+      System.out.format("Args: %s\n", modelContainerSpec.getArgsList());
+      System.out.format("Predict Route: %s\n", modelContainerSpec.getPredictRoute());
+      System.out.format("Health Route: %s\n", modelContainerSpec.getHealthRoute());
+
+      for (EnvVar envVar : modelContainerSpec.getEnvList()) {
+        System.out.println("Env");
+        System.out.format("Name: %s\n", envVar.getName());
+        System.out.format("Value: %s\n", envVar.getValue());
+      }
+
+      for (Port port : modelContainerSpec.getPortsList()) {
+        System.out.println("Port");
+        System.out.format("Container Port: %s\n", port.getContainerPort());
+      }
+
+      for (DeployedModelRef deployedModelRef : modelResponse.getDeployedModelsList()) {
+        System.out.println("Deployed Model");
+        System.out.format("Endpoint: %s\n", deployedModelRef.getEndpoint());
+        System.out.format("Deployed Model Id: %s\n", deployedModelRef.getDeployedModelId());
+      }
+
+      Status status = trainingPipelineResponse.getError();
+      System.out.println("Error");
+      System.out.format("Code: %s\n", status.getCode());
+      System.out.format("Message: %s\n", status.getMessage());
+    }
+  }
+}
